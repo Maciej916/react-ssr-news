@@ -8,15 +8,15 @@ import { Helmet } from 'react-helmet';
 import Routes from '../client/Routes';
 
 export default (req, store, context) => {
-  const content = renderToString(
-    <Provider store={store}>
-      <StaticRouter location={req.path} context={context}>
-        <div>{renderRoutes(Routes)}</div>
-      </StaticRouter>
-    </Provider>
-  );
-  const helmet = Helmet.renderStatic();
-  return `<!DOCTYPE html>
+    const content = renderToString(
+        <Provider store={store}>
+            <StaticRouter location={req.path} context={context}>
+                {renderRoutes(Routes)}
+            </StaticRouter>
+        </Provider>
+    );
+    const helmet = Helmet.renderStatic();
+    return `<!DOCTYPE html>
             <head>
                 ${helmet.title.toString()}
                 ${helmet.meta.toString()}
@@ -27,10 +27,7 @@ export default (req, store, context) => {
             <body>
                 <div id="root">${content}</div>
                 <script>
-                    window.__PRELOADED_STATE__ = ${serialize(store.getState()).replace(
-                      /</g,
-                      '\\u003c'
-                    )}
+                    window.__PRELOADED_STATE__ = ${serialize(store.getState()).replace(/</g, '\\u003c')}
                 </script>
                 <script src="/bundle.js"></script>
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

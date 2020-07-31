@@ -103,6 +103,11 @@ const Header = () => {
                   Recode
                 </Link>
               </li>
+              <li>
+                <Link to="/steam" className="item">
+                  Steam
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
